@@ -1,0 +1,9 @@
+enabled,name,red,green,blue
+true,red,255,0,0
+true,blue,0,0,255
+true,green,0,0,255
+true,black,0,0,0
+true,cyan,0,255,255
+true,magenta,255,0,255
+true,yellow,255,255,0
+false,white,255,255,255

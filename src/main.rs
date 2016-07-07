@@ -1,5 +1,6 @@
 extern crate image;
 extern crate rand;
+extern crate csv;
 
 use std::fs::File;
 use std::path::Path;
@@ -12,16 +13,18 @@ fn main() {
 
     let mut imgbuf = image::ImageBuffer::new(image_size, image_size);
 
-    let red = [255, 0, 0];
-    let blue = [0, 255, 0];
-    let green = [0, 0, 255];
-    let black = [0, 0, 0];
-    let cyan = [0, 255, 255];
-    let magenta = [255, 0, 255];
-    let yellow = [255, 255, 0];
-    let white = [255, 255, 255];
+    let mut csv_reader = csv::Reader::from_file("./colors.csv")
+        .unwrap()
+        .has_headers(true);
 
-    let colors = [red, blue, green, black, cyan, magenta, yellow];
+    let mut colors: Vec<[u8; 3]> = vec![];
+
+    for row in csv_reader.decode() {
+        let (enabled, _name, red, green, blue): (bool, String, u8, u8, u8) = row.unwrap();
+        if enabled {
+            colors.push([red, green, blue]);
+        }
+    }
 
     let mut tiles = vec![vec![[0; 3]; tiles_per_row]; tiles_per_row];
 
