@@ -5,15 +5,8 @@ extern crate csv;
 use std::fs::File;
 use std::path::Path;
 
-fn main() {
-    let image_size = 400;
-    let tiles_per_row: usize = 10;
-
-    let tile_size = image_size / tiles_per_row as u32;
-
-    let mut imgbuf = image::ImageBuffer::new(image_size, image_size);
-
-    let mut csv_reader = csv::Reader::from_file("./colors.csv")
+fn read_colors(filepath: &str) -> Vec<[u8; 3]> {
+    let mut csv_reader = csv::Reader::from_file(filepath)
         .unwrap()
         .has_headers(true);
 
@@ -24,6 +17,10 @@ fn main() {
         colors.push([red, green, blue]);
     }
 
+    colors
+}
+
+fn generate_tiles(colors: Vec<[u8; 3]>, tiles_per_row: usize) -> Vec<Vec<[u8; 3]>> {
     let mut tiles = vec![vec![[0; 3]; tiles_per_row]; tiles_per_row];
 
     let mut rng = rand::thread_rng();
@@ -34,6 +31,12 @@ fn main() {
         }
     }
 
+    tiles
+}
+
+fn generate_image(image_size: u32, tile_size: u32, tiles: Vec<Vec<[u8; 3]>>) -> image::RgbImage {
+    let mut imgbuf: image::RgbImage = image::ImageBuffer::new(image_size, image_size);
+
     for (x, y, pixel) in imgbuf.enumerate_pixels_mut() {
         let xx = x / tile_size;
         let yy = y / tile_size;
@@ -43,7 +46,25 @@ fn main() {
         *pixel = image::Rgb(rgb);
     }
 
-    let ref mut fout = File::create(&Path::new("image.png")).unwrap();
+    imgbuf
+}
 
-    let _ = image::ImageRgb8(imgbuf).save(fout, image::PNG);
+fn write_image_file(image: image::RgbImage, filepath: &str) -> Result<(), image::ImageError> {
+    let ref mut fout = File::create(&Path::new(filepath)).unwrap();
+
+    image::ImageRgb8(image).save(fout, image::PNG)
+}
+
+fn main() {
+    let image_size = 400;
+    let tiles_per_row: usize = 10;
+    let tile_size = image_size / tiles_per_row as u32;
+
+    let colors = read_colors("./colors.csv");
+
+    let tiles = generate_tiles(colors, tiles_per_row);
+
+    let image = generate_image(image_size, tile_size, tiles);
+
+    let _ = write_image_file(image, "image.png");
 }
