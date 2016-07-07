@@ -7,7 +7,7 @@ use std::path::Path;
 
 fn main() {
     let image_size = 400;
-    let tiles_per_row: usize = 25;
+    let tiles_per_row: usize = 10;
 
     let tile_size = image_size / tiles_per_row as u32;
 
