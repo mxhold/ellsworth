@@ -1,7 +1,7 @@
 # ellsworth
 
 A small program to generate an image in the style of
-[Ellsworth Kelly](https://en.wikipedia.org/wiki/Ellsworth_Kelly).
+[Ellsworth Kelly](https://www.sfmoma.org/artwork/99.352).
 
 ## Getting started
 
