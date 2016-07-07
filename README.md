@@ -15,9 +15,20 @@ Pull down the project:
 Add a file `colors.csv` with the following format:
 
     name,red,green,blue
-    red,255,0,0
-    green,0,255,0
-    blue,0,0,255
+    brown,92,35,18
+    blue,82,97,180
+    orange,239,102,1
+    skyblue,0,138,181
+    green,0,103,65
+    yellow,234,218,1
+    pink,242,134,157
+    middleblue,0,100,186
+    lightorange,241,146,0
+    red,229,30,0
+    lightgreen,148,202,108
+    purple,39,29,102
+    lightgreen,148,199,107
+    grey,225,221,218
 
 Then to generate an image at `image.png` 500x500 pixels with 10x10 tiles:
 
