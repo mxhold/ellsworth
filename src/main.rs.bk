@@ -54,11 +54,8 @@ fn write_image_file(image: image::RgbImage, filepath: &str) -> Result<(), image:
     image::ImageRgb8(image).save(fout, image::PNG)
 }
 
-fn create_image(size: u32,
-                tiles_per_row: usize,
-                colors_filepath: &str,
-                output_filepath: &str)
-                -> Result<(), image::ImageError> {
+fn create_image(size: u32, tiles_per_row: usize, colors_filepath: &str, output_filepath: &str)
+    -> Result<(), image::ImageError> {
     let colors = read_colors(colors_filepath);
 
     let tiles = generate_tiles(colors, tiles_per_row);
