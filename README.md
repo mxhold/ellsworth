@@ -30,7 +30,7 @@ Add a file `colors.csv` with the following format:
     lightgreen,148,199,107
     grey,225,221,218
 
-Then to generate an image at `image.png` 500x500 pixels with 10x10 tiles:
+Then to generate an image with 500x500 pixels and 10x10 tiles at `image.png`:
 
     cargo build --release
     ./target/release/ellsworth 500 10
