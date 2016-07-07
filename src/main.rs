@@ -73,10 +73,19 @@ fn create_image(size: u32,
 fn main() {
     let mut args = env::args();
 
-    let _program_name = args.next().unwrap();
+    let _program_name = args.next();
 
-    let image_size: u32 = args.next().unwrap().parse().unwrap();
-    let tiles_per_row: usize = args.next().unwrap().parse().unwrap();
+    let image_size: u32 = args
+        .next()
+        .expect("Image size required")
+        .parse()
+        .expect("Image size must be number");
+
+    let tiles_per_row: usize = args
+        .next()
+        .expect("Tiles per row required")
+        .parse()
+        .expect("Tiles per row must be number");
 
     let _ = create_image(image_size, tiles_per_row, "./colors.csv", "./image.png");
 }
