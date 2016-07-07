@@ -20,10 +20,8 @@ fn main() {
     let mut colors: Vec<[u8; 3]> = vec![];
 
     for row in csv_reader.decode() {
-        let (enabled, _name, red, green, blue): (bool, String, u8, u8, u8) = row.unwrap();
-        if enabled {
-            colors.push([red, green, blue]);
-        }
+        let (_name, red, green, blue): (String, u8, u8, u8) = row.unwrap();
+        colors.push([red, green, blue]);
     }
 
     let mut tiles = vec![vec![[0; 3]; tiles_per_row]; tiles_per_row];
