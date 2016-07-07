@@ -4,11 +4,10 @@ extern crate csv;
 
 use std::fs::File;
 use std::path::Path;
+use std::env;
 
 fn read_colors(filepath: &str) -> Vec<[u8; 3]> {
-    let mut csv_reader = csv::Reader::from_file(filepath)
-        .unwrap()
-        .has_headers(true);
+    let mut csv_reader = csv::Reader::from_file(filepath).unwrap().has_headers(true);
 
     let mut colors: Vec<[u8; 3]> = vec![];
 
@@ -55,16 +54,25 @@ fn write_image_file(image: image::RgbImage, filepath: &str) -> Result<(), image:
     image::ImageRgb8(image).save(fout, image::PNG)
 }
 
-fn main() {
-    let image_size = 400;
-    let tiles_per_row: usize = 10;
-    let tile_size = image_size / tiles_per_row as u32;
-
-    let colors = read_colors("./colors.csv");
+fn create_image(image_size: u32, tiles_per_row: usize, colors_filepath: &str, output_filepath: &str) -> Result<(), image::ImageError> {
+    let colors = read_colors(colors_filepath);
 
     let tiles = generate_tiles(colors, tiles_per_row);
 
+    let tile_size = image_size / tiles_per_row as u32;
+
     let image = generate_image(image_size, tile_size, tiles);
 
-    let _ = write_image_file(image, "image.png");
+    write_image_file(image, output_filepath)
+}
+
+fn main() {
+    let mut args = env::args();
+
+    let _program_name = args.next().unwrap();
+
+    let image_size: u32 = args.next().unwrap().parse().unwrap();
+    let tiles_per_row: usize = args.next().unwrap().parse().unwrap();
+
+    let _ = create_image(image_size, tiles_per_row, "./colors.csv", "./image.png");
 }
