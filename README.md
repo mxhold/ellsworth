@@ -27,7 +27,6 @@ Add a file `colors.csv` with the following format:
     red,229,30,0
     lightgreen,148,202,108
     purple,39,29,102
-    lightgreen,148,199,107
     grey,225,221,218
 
 Then to generate an image with 500x500 pixels and 10x10 tiles at `image.png`:
