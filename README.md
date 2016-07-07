@@ -1,7 +1,8 @@
 # ellsworth
 
 A small program to generate an image in the style of
-[Ellsworth Kelly](https://www.sfmoma.org/artwork/99.352).
+[Ellsworth Kelly](https://www.sfmoma.org/artwork/99.352), inspired by [Jenn
+Schiffer](http://jennmoney.biz/)'s [`var t;`](http://vart.institute/).
 
 ## Getting started
 
