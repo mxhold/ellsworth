@@ -4,21 +4,24 @@ extern crate rand;
 use std::fs::File;
 use std::path::Path;
 
-
-
 fn main() {
     let image_size = 400;
-    let tiles_per_row: usize = 10;
+    let tiles_per_row: usize = 25;
+
     let tile_size = image_size / tiles_per_row as u32;
 
     let mut imgbuf = image::ImageBuffer::new(image_size, image_size);
 
-    let red: [u8; 3] = [255, 0, 0];
+    let red = [255, 0, 0];
     let blue = [0, 255, 0];
     let green = [0, 0, 255];
     let black = [0, 0, 0];
+    let cyan = [0, 255, 255];
+    let magenta = [255, 0, 255];
+    let yellow = [255, 255, 0];
+    let white = [255, 255, 255];
 
-    let colors = [red, blue, green, black];
+    let colors = [red, blue, green, black, cyan, magenta, yellow];
 
     let mut tiles = vec![vec![[0; 3]; tiles_per_row]; tiles_per_row];
 
@@ -26,7 +29,7 @@ fn main() {
 
     for row in &mut tiles {
         for mut tile in row {
-            *tile = *rand::sample(&mut rng, colors.iter(), 1)[0];
+            *tile = *rand::sample(&mut rng, colors.iter(), 1).pop().unwrap();
         }
     }
 
