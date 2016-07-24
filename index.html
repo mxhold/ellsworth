@@ -1,0 +1,61 @@
+<html>
+<head>
+  <title>ellsworth</title>
+</head>
+
+<body>
+  <div>
+    <label for="tilewidth">Tile width</label>
+    <input id="tilewidth" type="number" min="1" value="25">
+
+    <br>
+
+    <label for="colors">Colors</label><br>
+    <textarea id="colors" rows="14">
+#312C2E
+#8CD0E7
+#5293D4
+#304C94
+#FD8629
+#342F46
+#97D45D
+#FAEF61
+#C29FC9
+#E93131
+#FA8D92
+#62E5B3
+#02964F
+#A83672</textarea>
+    <br>
+
+    <button onclick="paint()">Paint</button>
+  </div>
+
+  <br>
+
+  <canvas id="canvas" width=500 height=500></canvas>
+
+  <script>
+    function sample(array) {
+      return array[Math.floor(Math.random() * array.length)]
+    }
+
+    var canvas = document.getElementById("canvas");
+    var ctx = canvas.getContext("2d");
+    var colors = document.getElementById("colors").value.split("\n");
+
+    function paint() {
+      tilewidth = parseInt(document.getElementById("tilewidth").value, 10);
+      for (var x = 0; x < canvas.width; x += tilewidth) {
+        for (var y = 0; y < canvas.width; y += tilewidth) {
+          ctx.fillStyle = sample(colors);
+          ctx.fillRect(x, y, tilewidth, tilewidth);
+        }
+      }
+    }
+
+    paint();
+  </script>
+</body>
+</html>
+
