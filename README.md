@@ -4,6 +4,10 @@ A small program to generate an image in the style of
 [Ellsworth Kelly](https://www.sfmoma.org/artwork/99.352), inspired by [Jenn
 Schiffer](http://jennmoney.biz/)'s [`var t;`](http://vart.institute/).
 
+This was mostly just a fun exercise for learning a bit more Rust.
+
+For a much simpler JavaScript implementation, see the [index.html](https://htmlpreview.github.io/?https://github.com/mxhold/ellsworth/blob/master/index.html) file.
+
 ## Getting started
 
 Requires [Rust](https://rust-lang.org).
