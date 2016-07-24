@@ -55,9 +55,10 @@
 
     var canvas = document.getElementById("canvas");
     var ctx = canvas.getContext("2d");
-    var colors = document.getElementById("colors").value.split("\n");
 
     function paint() {
+      var colors = document.getElementById("colors").value.split("\n");
+
       tilewidth = parseInt(document.getElementById("tilewidth").value, 10);
       for (var x = 0; x < canvas.width; x += tilewidth) {
         for (var y = 0; y < canvas.width; y += tilewidth) {
